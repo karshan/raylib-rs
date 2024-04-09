@@ -45,6 +45,12 @@ impl<'a> std::ops::Deref for RaylibDrawHandle<'a> {
     }
 }
 
+impl<'a> std::ops::DerefMut for RaylibDrawHandle<'a> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
+
 impl<'a> RaylibDraw for RaylibDrawHandle<'a> {}
 
 // Texture2D Stuff
@@ -162,6 +168,12 @@ impl<'a, T> std::ops::Deref for RaylibMode3D<'a, T> {
 
     fn deref(&self) -> &Self::Target {
         &self.0
+    }
+}
+
+impl<'a, T> std::ops::DerefMut for RaylibMode3D<'a, T> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
     }
 }
 

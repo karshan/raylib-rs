@@ -61,7 +61,7 @@ fn build_with_cmake(src_path: &str) {
 
     let mut conf = cmake::Config::new(src_path);
     let mut builder;
-    let mut profile = "";
+    let profile;
     #[cfg(debug_assertions)]
     {
         builder = conf.profile("Debug");
@@ -193,6 +193,7 @@ fn gen_bindings() {
         .rustified_enum(".+")
         .clang_arg("-std=c99")
         .clang_arg(plat)
+        .clang_arg("-fkeep-inline-functions")
         .parse_callbacks(Box::new(ignored_macros));
 
     if platform == Platform::Desktop && os == PlatformOS::Windows {
@@ -207,7 +208,7 @@ fn gen_bindings() {
     }
 
     // Build
-    let bindings = builder.generate().expect("Unable to generate bindings");
+    let bindings = builder.generate_inline_functions(true).generate().expect("Unable to generate bindings");
 
     let out_path = PathBuf::from(env::var("OUT_DIR").unwrap());
     bindings

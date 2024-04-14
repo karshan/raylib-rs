@@ -300,7 +300,6 @@ pub trait RaylibShader: AsRef<ffi::Shader> + AsMut<ffi::Shader> {
 impl RaylibHandle {
     /// Sets a custom projection matrix (replaces internal projection matrix).
     #[inline]
-    #[cfg(target_os = "windows")]
     pub fn set_matrix_projection(&mut self, _: &RaylibThread, proj: Matrix) {
         unsafe {
             ffi::rlSetMatrixProjection(proj.into());
@@ -309,7 +308,6 @@ impl RaylibHandle {
 
     /// Sets a custom modelview matrix (replaces internal modelview matrix).
     #[inline]
-    #[cfg(target_os = "windows")]
     pub fn set_matrix_modelview(&mut self, _: &RaylibThread, view: Matrix) {
         unsafe {
             ffi::rlSetMatrixModelview(view.into());

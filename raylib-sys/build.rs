@@ -60,7 +60,7 @@ fn build_with_cmake(src_path: &str) {
     let (platform, platform_os) = platform_from_target(&target);
 
     let mut conf = cmake::Config::new(src_path);
-    let mut builder;
+    let builder;
     // let profile;
     #[cfg(debug_assertions)]
     {
